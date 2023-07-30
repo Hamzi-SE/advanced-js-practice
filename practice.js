@@ -131,3 +131,47 @@ console.log(id.next().value)
 
 // A little hack :)
 // console.log([...id]) // infinite loop
+
+// Generator - composition (yield*)
+// Combine multiple generators into one is called generator composition
+
+function* range(start, end) {
+	for (let value = start; value <= end; value++) {
+		yield value
+	}
+}
+
+let x = range(10, 13)
+console.log(x.next())
+console.log(x.next())
+console.log(x.next())
+console.log(x.next())
+console.log(x.next())
+
+function* multiRange() {
+	yield* range(0, 2) // yield* is means yield all the values of the generator
+	yield* range(10, 12)
+	yield* range(100, 102)
+}
+
+let multiGenerator = multiRange()
+console.log([...multiGenerator])
+
+// Generator can also take inputs	(we can pass the input to the next() method)
+function* generatorWithInput() {
+	let input = yield 1
+	if (input === 1) {
+		console.log('1 was passed')
+	}
+	console.log(input)
+	let input2 = yield 2
+	console.log(input2)
+	let input3 = yield 3
+	console.log(input3)
+}
+
+let generator2 = generatorWithInput()
+let r1 = generator2.next() // we can't pass the input to the first next() method because it doesn't have any yield
+let r2 = generator2.next(r1.value)
+let r3 = generator2.next(r2.value)
+generator2.next(r3.value)
