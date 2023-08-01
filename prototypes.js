@@ -52,3 +52,50 @@ for (let key in puppy) {
 console.log(Object.keys(puppy)) // [ 'play', 'walk' ]
 // Object.values(obj) returns only own values of an object (without inherited ones).
 console.log(Object.values(puppy)) // [ true, [Function: walk] ]
+
+// Object.hasOwnProperty() // returns true if the property is own, otherwise false
+console.log(Object.hasOwn(puppy, 'play')) // true
+// OR
+console.log(puppy.hasOwnProperty('play')) // true
+
+// enumerable means if the property is visible in loops or not (enumerable means countable)
+
+const obj = {
+	a: 1,
+	b: 2,
+	c: 3,
+}
+
+// Object.getOwnPropertyNames(obj) returns all own properties.
+console.log(Object.getOwnPropertyNames(obj)) // [ 'a', 'b', 'c' ]
+
+// Object.getOwnPropertyDescriptors(obj) returns all own property descriptors.
+console.log(Object.getOwnPropertyDescriptors(obj)) // { a: { value: 1, writable: true, enumerable: true, configurable: true }, b: { value: 2, writable: true,... }
+
+// We can use Object.defineProperties(obj, descriptors) to define multiple properties.
+Object.defineProperties(obj, {
+	d: {
+		value: 4,
+		writable: true, // default
+		enumerable: true, // default
+		configurable: true, // default
+	},
+	e: {
+		value: 5,
+		writable: false, // means we can not change the value of e property
+		enumerable: false, // means e property will not be visible in loops
+		configurable: true, // means we can not delete the e property
+	},
+})
+
+console.log(obj) // { a: 1, b: 2, c: 3, d: 4 }  // e property is not visible in console.log(obj) because it is not enumerable
+
+// Object.getOwnPropertyNames(obj) returns all own properties.
+console.log(Object.getOwnPropertyNames(obj)) // [ 'a', 'b', 'c', 'd', 'e' ]
+
+obj.e = 10 // we can not change the value of e property because it is not writable
+console.log(obj) // { a: 1, b: 2, c: 3, d: 4 } }
+
+for (let key in obj) {
+	console.log(key) // a, b, c, d
+}
