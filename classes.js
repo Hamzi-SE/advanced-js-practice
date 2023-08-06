@@ -14,7 +14,7 @@ class User {
 
 	set fullName(value) {
 		// setter
-		;[this.firstName, this.lastName] = value.split(' ') // array destructuring
+		[this.firstName, this.lastName] = value.split(' ') // array destructuring
 	}
 }
 
