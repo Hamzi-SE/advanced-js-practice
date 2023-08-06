@@ -14,7 +14,7 @@ class User {
 
 	set fullName(value) {
 		// setter
-		[this.firstName, this.lastName] = value.split(' ') // array destructuring
+		;[this.firstName, this.lastName] = value.split(' ') // array destructuring
 	}
 }
 
@@ -194,7 +194,6 @@ for (let key in shape1) {
 }
 
 // ---- # Private properties and methods (New)
-
 // we can use '#' before the property name to make it private
 
 class CoffeeMachine2 {
